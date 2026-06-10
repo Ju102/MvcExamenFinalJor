@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Asistente Virtual de Conciertos";
+}
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow-sm">
+                <div class="card-header bg-dark text-white text-center py-3">
+                    <h4 class="mb-0">🎵 Consulta a nuestro Asistente de Conciertos</h4>
+                    <small class="text-muted text-light-50">Reto Cloud - AWS Lambda & Azure AI Foundry</small>
+                </div>
+                <div class="card-body p-4">
+                    
+                    <form method="post">
+                        <div class="mb-3">
+                            <label for="pregunta" class="form-label fw-bold">Escribe tu pregunta sobre los eventos o artistas:</label>
+                            <textarea class="form-control" id="pregunta" name="pregunta" rows="3" 
+                                      placeholder="Ej: ¿Quién es el artista del concierto de Rock del próximo viernes?">@ViewBag.Pregunta</textarea>
+                        </div>
+                        <div class="d-grid">
+                            <button class="btn btn-primary btn-lg">Preguntar a la IA</button>
+                        </div>
+                    </form>
+
+                    @if (ViewBag.Respuesta != null)
+                    {
+                        <div class="card mt-4 border-success animate__animated animate__fadeIn">
+                            <div class="card-header bg-success text-white fw-bold">
+                                ✨ Respuesta del Asistente IA:
+                            </div>
+                            <div class="card-body bg-light">
+                                <p class="card-text text-dark fs-5" style="white-space: pre-line;">@ViewBag.Respuesta</p>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

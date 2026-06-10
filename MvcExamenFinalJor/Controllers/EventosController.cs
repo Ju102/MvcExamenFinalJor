@@ -8,10 +8,12 @@ namespace MvcExamenFinalJor.Controllers
     public class EventosController : Controller
     {
         private readonly ServiceEventos service;
+        private readonly ServiceAI AIservice;
 
-        public EventosController(ServiceEventos service)
+        public EventosController(ServiceEventos service, ServiceAI AIservice)
         {
             this.service = service;
+            this.AIservice = AIservice;
         }
 
         public async Task<IActionResult> Index()
@@ -35,6 +37,22 @@ namespace MvcExamenFinalJor.Controllers
                 List<Evento> eventos = await this.service.GetEventosByIdCategoria(idcategoria.Value);
                 return View(eventos);
             }
+        }
+
+        public IActionResult ChatIA()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChatIA(string pregunta)
+        {
+            string respuesta = await this.AIservice.GetRespuestaAsync(pregunta);
+
+            ViewBag.Pregunta = pregunta;
+            ViewBag.Respuesta = respuesta;
+
+            return View(); 
         }
     }
 }
